@@ -1,17 +1,17 @@
 #!/bin/bash
-# Build the Foretrex plugin (civ debug) against YOUR copy of the ATAK-CIV 5.6.0 SDK.
+# Build the Foretrex plugin (civ debug) against YOUR copy of the ATAK-CIV 5.8.0 SDK.
 # The SDK is not part of this repo. Download it from tak.gov and unzip it.
 #
 #   scripts/build.sh
 #
 # Optional environment variables:
-#   ATAK_SDK        path to the unzipped SDK   (default: ~/Downloads/ATAK-CIV-5.6.0-SDK)
+#   ATAK_SDK        path to the unzipped SDK   (default: ~/Downloads/ATAK-CIV-5.8.0-SDK)
 #   ATAK_MAIN_JAR   path to main.jar if it is not inside the SDK folder
 #   ANDROID_SDK_ROOT / ANDROID_HOME   Android SDK (default: ~/Android/Sdk)
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SDK="${ATAK_SDK:-$HOME/Downloads/ATAK-CIV-5.6.0-SDK}"
+SDK="${ATAK_SDK:-$HOME/Downloads/ATAK-CIV-5.8.0-SDK}"
 ANDROID_SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-$HOME/Android/Sdk}}"
 PROJ="$SDK/samples/atak-garmin"
 
@@ -19,8 +19,8 @@ die() { echo "ERROR: $*" >&2; exit 1; }
 
 # 1. The SDK. The build plugin looks for these files two folders above the project.
 [ -f "$SDK/atak-gradle-takdev.jar" ] || die "ATAK SDK not found at $SDK
-  Download the ATAK-CIV 5.6.0 SDK from tak.gov, unzip it, then run:
-    ATAK_SDK=/path/to/ATAK-CIV-5.6.0-SDK scripts/build.sh"
+  Download the ATAK-CIV 5.8.0 SDK from tak.gov, unzip it, then run:
+    ATAK_SDK=/path/to/ATAK-CIV-5.8.0-SDK scripts/build.sh"
 [ -f "$SDK/android_keystore" ] || die "$SDK/android_keystore is missing (incomplete SDK download?)"
 
 if [ ! -f "$SDK/main.jar" ]; then

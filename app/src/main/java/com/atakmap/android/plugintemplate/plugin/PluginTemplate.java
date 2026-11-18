@@ -24,7 +24,7 @@ import java.util.Locale;
  * Entry point. Adds a toolbar button; tapping it summarises what is on the map and offers to
  * send it to a USB-connected Foretrex 401 as a GPX file.
  *
- * Built against the ATAK-CIV 5.6.0 SDK (ATAK_VERSION in app/build.gradle).
+ * Built against the ATAK-CIV 5.8.0 SDK (ATAK_VERSION in app/build.gradle).
  */
 public class PluginTemplate implements IPlugin {
 

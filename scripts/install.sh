@@ -6,12 +6,12 @@
 #
 # Optional environment variables:
 #   ATAK_APK   path to atak.apk from the SDK  (default: next to the SDK folder)
-#   ATAK_SDK   path to the unzipped SDK       (default: ~/Downloads/ATAK-CIV-5.6.0-SDK)
+#   ATAK_SDK   path to the unzipped SDK       (default: ~/Downloads/ATAK-CIV-5.8.0-SDK)
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET="${1:-phone}"
-SDK="${ATAK_SDK:-$HOME/Downloads/ATAK-CIV-5.6.0-SDK}"
+SDK="${ATAK_SDK:-$HOME/Downloads/ATAK-CIV-5.8.0-SDK}"
 ANDROID_SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-$HOME/Android/Sdk}}"
 ADB="$ANDROID_SDK/platform-tools/adb"
 [ -x "$ADB" ] || ADB="$(command -v adb || true)"

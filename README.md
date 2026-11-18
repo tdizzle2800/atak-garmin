@@ -14,7 +14,7 @@ It does three things:
 
 ## Status
 
-- **Builds.** `assembleCivDebug` succeeds against the ATAK-CIV **5.6.0** SDK.
+- **Builds.** `assembleCivDebug` succeeds against the ATAK-CIV **5.8.0** SDK.
 - **GPX code is tested** on a desktop JVM (6 checks, see "GPX self test").
 - **Not confirmed yet:** that the Foretrex actually imports a file dropped into `Garmin/GPX/`, and a
   full ATAK-to-Foretrex transfer on real hardware. GPX over USB mass storage comes from public
@@ -24,28 +24,36 @@ It does three things:
 
 | Thing | Notes |
 |-------|-------|
-| ATAK-CIV 5.6.0 SDK | **Not in this repo.** Download it from tak.gov and unzip it. It comes with `atak.apk`, the build plugin and the API jar. |
+| ATAK-CIV 5.8.0 SDK | **Not in this repo.** Download it from tak.gov and unzip it. It comes with `atak.apk`, the build plugin and the API jar. |
 | Android SDK | Android Studio installs it. Gradle fetches Platform 36 by itself on the first build. |
 | JDK 17 or 21 | **Not 25**: Gradle 8.14 fails with "Unsupported class file major version 69". |
 | Internet on the first build | The Gradle wrapper downloads Gradle 8.14.3 and the Android build tools. |
 | Phone with USB host (OTG) | Plus a USB-OTG adapter or cable that carries data. |
 
-The phone must run the **SDK build of ATAK** (`atak.apk` from the SDK, same version). A debug plugin
-is signed with the SDK key, so the Play Store ATAK will not load it. Uninstall the Play Store ATAK first.
+A debug build is signed with the SDK key, so it only loads in the **SDK build of ATAK** (`atak.apk` from
+the SDK, same version), not the Play Store ATAK. To run on the Play Store ATAK, use a release APK from
+GitHub Releases: those are built and signed by TAK.gov's Third Party Pipeline (see "Signed release builds").
 
 ## Build
 
-Unzip the SDK so it sits at `~/Downloads/ATAK-CIV-5.6.0-SDK`, or point `ATAK_SDK` at it, then:
+Unzip the SDK so it sits at `~/Downloads/ATAK-CIV-5.8.0-SDK`, or point `ATAK_SDK` at it, then:
 
     git clone https://github.com/tdizzle2800/atak-garmin.git && cd atak-garmin
     scripts/build.sh
-    # or: ATAK_SDK=/path/to/ATAK-CIV-5.6.0-SDK scripts/build.sh
+    # or: ATAK_SDK=/path/to/ATAK-CIV-5.8.0-SDK scripts/build.sh
 
 The script picks a JDK 17/21, copies the project to `<SDK>/samples/atak-garmin` (the SDK's build plugin
 needs it there), writes `local.properties` (paths only, no passwords) and runs `./gradlew assembleCivDebug`.
-The APK ends up in `dist/ATAK-Plugin-atak-garmin-0.1--5.6.0-civ-debug.apk`.
+The APK ends up in `dist/ATAK-Plugin-atak-garmin-0.3.0--5.8.0-civ-debug.apk`.
 
 If `main.jar` is not inside the SDK folder, the script looks for `../sdk files/main.jar` or `ATAK_MAIN_JAR`.
+
+## Signed release builds
+
+Release APKs come from TAK.gov's [Third Party Pipeline](https://tak.gov/user_builds): zip the repo with a
+single `atak-garmin/` root folder, upload it, and download the signed APK when the build succeeds. The
+pipeline runs `assembleCivRelease` and fetches the ATAK SDK that matches `ATAK_VERSION` itself.
+`ATAK_VERSION` must match the ATAK on the phone (the Play Store ATAK-CIV 5.8.0 refuses plugins built for 5.8.0).
 
 ## Install
 
@@ -124,7 +132,6 @@ is kept from that template.
 - Confirming the Foretrex import on real hardware (see the manual check above).
 - The USB code writes to the **first** USB drive it finds, so connect only the Foretrex.
 - Sending only selected items (right now it sends everything visible on the map).
-- Targeting a newer ATAK. `ATAK_VERSION` in `app/build.gradle` is `5.6.0`; use the SDK that matches your ATAK.
 - No licence has been chosen for this project's own code yet.
 
 ## Not in this repo
