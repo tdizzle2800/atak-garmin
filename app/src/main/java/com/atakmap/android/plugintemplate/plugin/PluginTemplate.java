@@ -1,5 +1,6 @@
 package com.atakmap.android.plugintemplate.plugin;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +23,7 @@ import java.util.Locale;
 
 /**
  * Entry point. Adds a toolbar button; tapping it summarises what is on the map and offers to
- * send it to a USB-connected Foretrex 401 as a GPX file.
+ * send it to a USB-connected Foretrex as a GPX file.
  *
  * Built against the ATAK-CIV 5.8.0 SDK (ATAK_VERSION in app/build.gradle).
  */
@@ -78,10 +79,11 @@ public class PluginTemplate implements IPlugin {
                 msg.append("\n- ").append(w);
             }
         }
-        msg.append("\n\nPlug the Foretrex into the phone with a USB-OTG cable, then tap Send.");
+        msg.append("\n\nPlug the Foretrex into the phone with a USB-OTG cable and switch it on, then tap Send. "
+                + "The first time, Android asks you to pick the GARMIN drive.");
 
         new AlertDialog.Builder(ui)
-                .setTitle("Send to Foretrex 401")
+                .setTitle("Send to Foretrex")
                 .setMessage(msg.toString())
                 .setNegativeButton("Cancel", null)
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
@@ -93,8 +95,13 @@ public class PluginTemplate implements IPlugin {
     }
 
     private void send(final Context ui, String gpx) {
+        if (!(ui instanceof Activity)) {
+            toast(ui, "Cannot open the folder picker from here.");
+            return;
+        }
         String name = "ATAK_" + new SimpleDateFormat("yyyyMMdd_HHmm", Locale.US).format(new Date()) + ".gpx";
-        new ForetrexUsbExporter(ui).export(name, gpx, new ForetrexUsbExporter.Callback() {
+        new GarminDriveExporter((Activity) ui).export(name, gpx, new GarminDriveExporter.Callback() {
+            @Override public void onInfo(final String m) { toast(ui, m); }
             @Override public void onSuccess(final String m) { toast(ui, m); }
             @Override public void onError(final String m) { toast(ui, m); }
         });

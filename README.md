@@ -1,6 +1,6 @@
 # atak-garmin
 
-An ATAK plugin that sends routes and waypoints from the ATAK map to a Garmin Foretrex 401 over USB.
+An ATAK plugin that sends routes and waypoints from the ATAK map to a Garmin Foretrex (tested with a Foretrex 601) over USB.
 It adds a **Foretrex** button to the ATAK toolbar. The button turns what is on the map into a GPX file
 and copies it onto the Foretrex through the phone's USB-OTG port.
 
@@ -9,16 +9,18 @@ It does three things:
 - **Reads the map.** Visible user-dropped waypoints and all routes. Route control points and other marker types are left out.
 - **Builds a GPX 1.1 file** and fits it to the Foretrex limits (table below). Anything it has to change
   (shortened names, thinned routes, dropped items) is listed in the dialog before you send.
-- **Writes it to the Foretrex.** The Foretrex 401 shows up as a USB drive. The plugin reads the drive
-  directly with [libaums](https://github.com/magnusja/libaums) and saves `ATAK_<date>_<time>.gpx` into `Garmin/GPX/`.
+- **Writes it to the Foretrex.** The Foretrex shows up as a small USB drive called `GARMIN`. Android mounts it
+  but only lets apps reach it through its folder picker, so the first time you tap **Send**, pick the
+  `GARMIN` drive and allow access. After that the plugin saves `ATAK_<date>_<time>.gpx` into `GARMIN/GPX/`
+  directly. The Foretrex loads the file the next time it starts.
 
 ## Download
 
-**[⬇ Download the latest APK (v0.3.0-beta)](https://github.com/tdizzle2800/atak-garmin/releases/download/v0.3.0-beta/atak-garmin-0.3.0-beta-civ.apk)** · [All releases](https://github.com/tdizzle2800/atak-garmin/releases)
+**[⬇ Download the latest APK (v0.4.0-beta)](https://github.com/tdizzle2800/atak-garmin/releases/download/v0.4.0-beta/atak-garmin-0.4.0-beta-civ.apk)** · [All releases](https://github.com/tdizzle2800/atak-garmin/releases)
 
 - Needs **ATAK-CIV 5.8.0** (the regular Play Store version works). Release APKs are signed by TAK.gov.
 - Install the APK, then in ATAK open **Plugins** and load **ATAK Garmin**. A **Foretrex** button appears in the tools menu.
-- Upgrading from 0.1.0-beta.1? Uninstall the old plugin first.
+- Upgrading from 0.3.0-beta or older? Uninstall the old plugin first.
 
 ## Status
 
@@ -122,7 +124,7 @@ The GPX classes are plain Java, no Android needed:
     app/src/main/java/.../plugintemplate/plugin/
         PluginTemplate.java                      toolbar button, summary dialog, send
         AtakMapReader.java                       reads waypoints and routes from the ATAK map
-        ForetrexUsbExporter.java                 USB permission and write to Garmin/GPX/ (libaums)
+        GarminDriveExporter.java                 Folder picker (first time) and write to GARMIN/GPX/
     app/src/test/java/com/atakgarmin/core/       self test and sample.gpx generator
     scripts/build.sh, scripts/install.sh         build and install helpers
     sample.gpx                                   two waypoints and a route for the manual check
@@ -133,7 +135,7 @@ is kept from that template.
 
 ## Logs
 
-    adb logcat | grep -i -E 'atak|foretrex|libaums'
+    adb logcat | grep -i -E 'atak|foretrex|GarminDrive'
 
 ## Not done yet
 
@@ -148,6 +150,6 @@ follow its terms. `.gitignore` keeps `*.apk`, `main.jar`, `local.properties` and
 
 ## License
 
-This project's own code is licensed under the [Apache License 2.0](LICENSE). Third-party parts (libaums,
-the Gradle wrapper, the user manual fonts and the ATAK plugin template) keep their own licences; see
+This project's own code is licensed under the [Apache License 2.0](LICENSE). Third-party parts (the Gradle
+wrapper, the user manual fonts and the ATAK plugin template) keep their own licences; see
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

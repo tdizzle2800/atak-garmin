@@ -3,7 +3,7 @@
     <!-- App -->
     <string name="app_name">ATAK Garmin</string>
     <!-- description -->
-    <string name="app_desc">Export ATAK routes and waypoints to a Garmin Foretrex 401 over USB OTG</string>
+    <string name="app_desc">Export ATAK routes and waypoints to a Garmin Foretrex over USB OTG</string>
 
 
 

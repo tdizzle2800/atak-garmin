@@ -87,4 +87,4 @@ if [ -n "$PKG" ]; then
   echo "Launched ATAK."
 fi
 echo "Accept ATAK's permission prompts and allow the plugin when it asks to load."
-echo "Logs:  $ADB -s $SERIAL logcat | grep -i -E 'atak|foretrex|libaums'"
+echo "Logs:  $ADB -s $SERIAL logcat | grep -i -E 'atak|foretrex|GarminDrive'"

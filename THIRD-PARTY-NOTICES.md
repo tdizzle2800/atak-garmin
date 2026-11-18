@@ -5,7 +5,6 @@ following third-party material, each under its own licence.
 
 | Component | Where | Licence |
 |-----------|-------|---------|
-| [libaums](https://github.com/magnusja/libaums) 0.10.0, Copyright Magnus Jahnen | Gradle dependency, bundled in the APK | [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 | Gradle wrapper (`gradlew`, `gradlew.bat`, `gradle/wrapper/`), Copyright Gradle, Inc. and the original authors | `gradle/wrapper/`, repo root | [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 | Libre Franklin fonts, Copyright (c) 2015 Impallari Type | `docs/user_manual/fonts/LibreFranklin-*.otf` | [SIL Open Font License 1.1](docs/user_manual/fonts/OFL.txt) |
 | Latin Modern Sans fonts, Copyright 2003, 2008 B. Jackowski and J. M. Nowacki | `docs/user_manual/fonts/lmsans*.otf` | [GUST Font License](docs/user_manual/fonts/GUST-FONT-LICENSE.txt) |

@@ -8,7 +8,7 @@
 
 buildscript {
 
-    ext.PLUGIN_VERSION = "0.3.0"
+    ext.PLUGIN_VERSION = "0.4.0"
     ext.ATAK_VERSION = '5.8.0'
 
     def takdevVersion = '3.+'
@@ -209,7 +209,10 @@ android {
             // It is strongly encouraged that plugin developers do not modify the archiveBaseName, version code logic and version 
             // name logic to provide for consistency within the community.   
             setProperty("archivesBaseName", "ATAK-Plugin-" + rootProject.name + "-" + PLUGIN_VERSION + "-" + getVersionName() + "-" + ATAK_VERSION)
-            defaultConfig.versionCode = getVersionCode()
+            // Without git history (e.g. the TAK.gov pipeline) getVersionCode() falls back to 1, and
+            // ATAK then keeps its cached verdict for an older build. Never go below PLUGIN_VERSION.
+            def pv = (PLUGIN_VERSION.tokenize('.').collect { it as int } + [0, 0, 0])
+            defaultConfig.versionCode = Math.max(getVersionCode(), pv[0] * 10000 + pv[1] * 100 + pv[2])
             defaultConfig.versionName = PLUGIN_VERSION + " (" + getVersionName() + ") - [" + ATAK_VERSION + "]"
         }
 
@@ -286,8 +289,6 @@ def getCommandFlavor() {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
-    // USB mass-storage access for the Foretrex when Android does not mount it automatically.
-    implementation 'me.jahnen.libaums:core:0.10.0'
 }
 
 configurations.all {
