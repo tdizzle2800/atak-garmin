@@ -22,6 +22,23 @@ It does three things:
 - Install the APK, then in ATAK open **Plugins** and load **ATAK Garmin**. A **Foretrex** button appears in the tools menu.
 - Upgrading from 0.1.0-beta.1? Uninstall it first (it was signed with a different key). Later versions install over each other.
 
+## Compatibility
+
+| Model | Status | Notes |
+|-------|--------|-------|
+| Foretrex 601 | ✅ **Tested** | Works with v0.4.0-beta on ATAK-CIV 5.8.0. |
+| Foretrex 701 Ballistic Edition | ⬜ Untested | Same platform as the 601; expected to work. |
+| Foretrex 801 | ⬜ Untested | |
+| Foretrex 901 | ⬜ Untested | |
+| Foretrex 401 | ⬜ Untested | Has USB storage mode with a `Garmin/GPX` folder; expected to work. |
+| Foretrex 301 | ⬜ Untested | Same as the 401 without the compass and altimeter; expected to work. |
+| Foretrex 201 | ❌ Not supported | Serial cable only, no USB storage mode. |
+| Foretrex 101 | ❌ Not supported | Serial cable only, no USB storage mode. |
+
+The plugin needs a Foretrex that shows up as a USB drive with a `GARMIN/GPX` folder. If your unit asks
+whether to enter USB storage (mass storage) mode when you plug it in, choose **Yes**.
+Tested a model? Open an issue with the model, firmware version and result.
+
 ## Status
 
 - **Builds.** `assembleCivDebug` succeeds against the ATAK-CIV **5.8.0** SDK.
