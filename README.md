@@ -14,7 +14,7 @@ It does three things:
   `GARMIN` drive and allow access. After that the plugin saves `ATAK_<date>_<time>.gpx` into `GARMIN/GPX/`
   directly. The Foretrex loads the file the next time it starts.
 
-## Download
+## Releases
 
 **[⬇ Download the latest APK (v0.4.0-beta)](https://github.com/tdizzle2800/atak-garmin/releases/download/v0.4.0-beta/atak-garmin-0.4.0-beta-civ.apk)** · [All releases](https://github.com/tdizzle2800/atak-garmin/releases)
 
