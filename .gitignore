@@ -1,0 +1,17 @@
+# Build output and Gradle/IDE state
+build/
+.gradle/
+.takdev/
+.idea/
+*.iml
+.DS_Store
+captures/
+
+# Machine-specific config (SDK paths, TAK repo credentials) - never commit
+local.properties
+
+# Binaries: ATAK and plugin APKs, ATAK API jar (get these from your ATAK SDK)
+*.apk
+*.aab
+main.jar
+dist/
