@@ -12,6 +12,14 @@ It does three things:
 - **Writes it to the Foretrex.** The Foretrex 401 shows up as a USB drive. The plugin reads the drive
   directly with [libaums](https://github.com/magnusja/libaums) and saves `ATAK_<date>_<time>.gpx` into `Garmin/GPX/`.
 
+## Download
+
+**[⬇ Download the latest APK (v0.3.0-beta)](https://github.com/tdizzle2800/atak-garmin/releases/download/v0.3.0-beta/atak-garmin-0.3.0-beta-civ.apk)** · [All releases](https://github.com/tdizzle2800/atak-garmin/releases)
+
+- Needs **ATAK-CIV 5.8.0** (the regular Play Store version works). Release APKs are signed by TAK.gov.
+- Install the APK, then in ATAK open **Plugins** and load **ATAK Garmin**. A **Foretrex** button appears in the tools menu.
+- Upgrading from 0.1.0-beta.1? Uninstall the old plugin first.
+
 ## Status
 
 - **Builds.** `assembleCivDebug` succeeds against the ATAK-CIV **5.8.0** SDK.
@@ -132,9 +140,14 @@ is kept from that template.
 - Confirming the Foretrex import on real hardware (see the manual check above).
 - The USB code writes to the **first** USB drive it finds, so connect only the Foretrex.
 - Sending only selected items (right now it sends everything visible on the map).
-- No licence has been chosen for this project's own code yet.
 
 ## Not in this repo
 
 The ATAK SDK (API jar, build plugin, signing key, `atak.apk`) is not included. Get it from tak.gov and
 follow its terms. `.gitignore` keeps `*.apk`, `main.jar`, `local.properties` and build output out of git.
+
+## License
+
+This project's own code is licensed under the [Apache License 2.0](LICENSE). Third-party parts (libaums,
+the Gradle wrapper, the user manual fonts and the ATAK plugin template) keep their own licences; see
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
