@@ -20,15 +20,16 @@ It does three things:
 
 - Needs **ATAK-CIV 5.8.0** (the regular Play Store version works). Release APKs are signed by TAK.gov.
 - Install the APK, then in ATAK open **Plugins** and load **ATAK Garmin**. A **Foretrex** button appears in the tools menu.
-- Upgrading from 0.3.0-beta or older? Uninstall the old plugin first.
+- Upgrading from 0.1.0-beta.1? Uninstall it first (it was signed with a different key). Later versions install over each other.
 
 ## Status
 
 - **Builds.** `assembleCivDebug` succeeds against the ATAK-CIV **5.8.0** SDK.
 - **GPX code is tested** on a desktop JVM (6 checks, see "GPX self test").
-- **Not confirmed yet:** that the Foretrex actually imports a file dropped into `Garmin/GPX/`, and a
-  full ATAK-to-Foretrex transfer on real hardware. GPX over USB mass storage comes from public
-  documentation, not from Garmin's own Windows software. **Do the manual check below before trusting it.**
+- **Works on real hardware.** A full ATAK-to-Foretrex transfer is confirmed on a Foretrex 601 with the
+  TAK.gov-signed release on ATAK-CIV 5.8.0: waypoints sent from ATAK show up on the device.
+- **Not tested yet:** other Foretrex models (401, 701). They use the same `GARMIN/GPX` folder, so they
+  should work the same way.
 
 ## What you need
 
